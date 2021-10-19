@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <title>Chat</title>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <div id="sidebar-title">
+                <h2>Channels</h2>
+            </div>
+            <button type="submit" id="btn-new" onclick="fct_callpopup()">New Channel</button>
+            <div id="channel-list">
+                <ul id="list">
+
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <div id="header">
+                <div id="channel-name">
+                </div>
+                <div id="search">
+                    <div id="searchbox">
+                        <input type="text" name="" id="searchtext" placeholder="Search">
+                    </div>
+                    <button type="submit" id="btn-search">Search</button>
+                </div>
+                <div id="user">
+                    <div id="username">
+                        <h3>Dario Diez</h3>
+                    </div>
+                    <div id="avatar">
+                        <img src="img/avatar.jpg" alt="avatar">
+                    </div>
+                </div>
+            </div>
+            <div id="chat">
+            </div>
+            <div id="footer">
+                <div id="new-message">
+                    <input type="text" name="" id="messagebox" placeholder="Type here...">
+                    <button type="submit" id="btn-send">Send</button>
+                </div>
+            </div>
+        </div>
+        <div id="popup">
+            <div id="popup-content">
+                <a href="#" onclick="fct_closeWindow()"><i class="far fa-times-circle"></i></a>
+                <h3>New Channel</h3>
+                <p>Name</p>
+                <input type="text" name="" id="createChannel">
+                <input type="submit" value="Create" id="create" onclick="fct_addNewChannel()">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/javascript.js"></script>
+</body>
+</html>

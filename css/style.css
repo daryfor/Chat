@@ -1,0 +1,262 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow: hidden;
+}
+
+/* BARRA LATERAL - CHANNELS */
+#sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100vh;
+    background: rgb(112, 105, 156);
+}
+
+#sidebar-title {
+    height: 70px;
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+}
+
+#sidebar-title h2 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+#btn-new {
+    margin: 0px 0px 20px 20px;
+    padding: .6rem 2rem;
+    border-radius: 30px;
+}
+
+#list {
+    padding-left: 60px;
+    list-style-type: none;
+}
+
+#list li {
+    width: 100%;
+    margin-bottom: 1.3rem;
+
+}
+
+#list li a {
+    display: block;
+    color: whitesmoke;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+#list li a:hover {
+    background: white;
+    color: rgb(112, 105, 156);
+    padding: 5px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+
+#main {
+    width: calc(100%-200px);
+    height: 100vh;
+    margin-left: 200px;
+}
+
+/* BARRA SUPERIOR */
+#header {
+    position: fixed;
+    top: 0;
+    width: calc(100% - 200px);
+    height: 50px;
+    display: flex;
+    background: white;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* CHAT */
+#chat {
+    width: 100%;
+    height: 100%;
+    margin-top: 80px;
+    display: block;
+}
+
+.contact {
+    display: flex;
+    margin: 20px 0px 20px 5px;
+    width: 100%;
+}
+
+.contact-img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.contact-img img {
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.msg {
+    display: inline-block;  
+    border-radius: 10px;
+    background: rgb(245, 235, 235);
+    padding: 10px 20px 10px 10px;
+}
+
+.contact-info {
+    display: flex;
+    width: 100%;
+}
+
+.username {
+    width: 75%;
+}
+
+.username h5 {
+    font-size: 14px;
+    color: rgb(73, 73, 73);
+}
+
+.contact-time {
+    width: 25%;
+    text-align: right;
+}
+
+.contact-time span {
+    font-size: 10px;
+    color: rgb(114, 114, 114);
+    justify-content: right;
+}
+
+.contact-msg {
+    padding: 10px 0px 0px 10px;
+    border-top: 1px solid rgb(197, 194, 194);
+}
+
+#footer {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    background: rgb(186, 184, 194);
+}
+
+#channel-name {
+    width: 20%;
+}
+
+#channel-name h2 {
+    margin: 15px 0px 0px 15px;
+    color: rgb(112, 105, 156);
+}
+
+#search {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#searchbox {
+    margin-top: 8px;
+    width: 400px;
+    text-align: center;
+}
+
+#searchtext {
+    border: 1px solid rgb(104, 103, 103);
+    border-radius: 30px;
+    box-shadow: 0px 0px 2px 1px rgb(104, 103, 103);
+    padding: 8px;
+    width: 90%;
+}
+
+#btn-search {
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    line-height: 1px;
+}
+
+#user {
+    display: flex;
+    width: 20%;
+    justify-content: right;
+}
+
+#username {
+    font-size: 14px;
+}
+
+#username h3 {
+    margin-top: 10px;
+}
+
+#avatar img {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+    z-index: -1;
+}
+
+/* POPUP */
+#popup {
+    background: rgb(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#popup-content {
+    width: 300px;
+    height: 150px;
+    margin-left: 200px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    display: grid;
+}
+
+#popup-content .far {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    cursor: pointer;
+}
+
+#popup-content h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(112, 105, 156);
+}
+
+#popup-content p {
+    margin-top: 15px;
+}
+
+#createChannel {
+    margin: 10px 0px 20px 0px;
+}
+
+#create {
+    width: 40%;
+    margin-left: 30%;
+}
