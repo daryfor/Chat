@@ -68,7 +68,7 @@
 
 #main {
     width: calc(100%-200px);
-    height: 100vh;
+    height: 100%;
     margin-left: 200px;
 }
 
@@ -87,10 +87,16 @@
 
 /* CHAT */
 #chat {
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 80vh;
     margin-top: 80px;
     display: block;
+    scroll-snap-align: start; */
+    width: 100%;
+    margin-bottom: 60px;
+    margin-top: 61px;
+    display: block;
+    overflow-y: scroll
 }
 
 .contact {
@@ -110,23 +116,25 @@
     margin-top: 10px;
 }
 
-.msg {
+.contact-messagebox {
     display: inline-block;  
     border-radius: 10px;
     background: rgb(245, 235, 235);
     padding: 10px 20px 10px 10px;
+    /* width: 30%; */
 }
 
 .contact-info {
     display: flex;
     width: 100%;
+    padding-right: 40px;
 }
 
-.username {
+.contact-username {
     width: 75%;
 }
 
-.username h5 {
+.contact-username h5 {
     font-size: 14px;
     color: rgb(73, 73, 73);
 }
@@ -143,16 +151,8 @@
 }
 
 .contact-msg {
-    padding: 10px 0px 0px 10px;
+    padding: 10px 20px 0px 10px;
     border-top: 1px solid rgb(197, 194, 194);
-}
-
-#footer {
-    width: 100%;
-    height: 80px;
-    position: fixed;
-    bottom: 0;
-    background: rgb(186, 184, 194);
 }
 
 #channel-name {
@@ -186,8 +186,8 @@
 
 #btn-search {
     margin: 10px;
-    padding: 10px 15px;
-    border-radius: 20px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 15px;
     line-height: 1px;
 }
 
@@ -211,6 +211,43 @@
     height: 50px;
     margin-right: 5px;
     z-index: -1;
+}
+
+/* FOOTER */
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 200px);
+    height: 80px;
+    display: flex;
+    background: rgb(228, 218, 218);
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+#new-message {
+    display: flex;
+    margin: 10px 50px 10px 50px;
+    width: 100%;
+    text-align: center;
+    background: rgb(228, 218, 218);
+}
+
+#new-message input {
+    margin: 10px 10px 10px 100px;
+    border: 1px solid rgb(112, 105, 156);
+    border-radius: 15px;
+    box-shadow: 3px 3px rgb(112, 105, 156);
+    padding: 10px;
+    width: 90%;
+
+}
+
+#btn-send {
+    margin: 10px 10px 10px 50px;
+    padding: 5px 40px 5px 40px;
+    border-radius: 15px;
 }
 
 /* POPUP */

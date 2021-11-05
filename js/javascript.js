@@ -42,20 +42,24 @@ class Chat {
     } */
 }
 
-function fct_fill_general () {
+/* function fct_fill_general (channel_name) {
 
-    console.log("hola ", chat);
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"Bienvenidos Geeks a GeeksHub Academy!!!"));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"Espero que disfruteis"));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"Un gusto"));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"1"));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"4"));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"523"));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"ytjfn"));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"."));
-    chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),"lbmdbgfvh"));
-    console.log("salida ",chat.channels[0]);
-}
+    chat.channels[0].messages = [
+        "Bienvenidos Geeks a GeeksHub Academy!!!",
+        "Espero que disfruteis",
+        "Un gusto",
+        "1",
+        "4",
+        "523",
+        "ytjfn",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque magni culpa, dicta cum laudantium laboriosam libero fugit omnis vitae modi, quisquam atque commodi amet, architecto ad neque perferendis explicabo aspernatur.",
+        "lbmdbgfvh",
+    ];
+
+    chat.channels[0].messages.forEach(sms => {
+        chat.channels[0].addMessage(new Message("Emperador Palpatine","img/palpatine.jpg",fct_formatDate(),sms));
+    });
+} */
 
 //Da formato a la fecha y a la hora para luego agregarlo al mensaje
 function fct_formatDate () {
@@ -69,42 +73,9 @@ function fct_formatDate () {
     return (day + "/" + month + " " + hour + ":" + min);
 }
 
-//Crea el primer mensaje automático de cada chat, excepto del General
+//Crea estructura del mensaje de chat del Contact
 function fct_createMessages_Contact(parent) {
 
-    /* let contact = document.createElement("div");
-    contact.setAttribute("class","contact");
-
-    let contactImg = document.createElement("div");
-    contactImg.setAttribute("class","contact-img");
-
-    let sms = document.createElement("div");
-    sms.setAttribute("class","msg");
-
-    let contactInfo = document.createElement("div");
-    contactInfo.setAttribute("class","contact-info");
-
-    let userNode = document.createElement("div");
-    userNode.setAttribute("class","username");
-
-    let contactTime = document.createElement("div");
-    contactTime.setAttribute("class","contact-time");
-
-    let contactSMS = document.createElement("div");
-    contactSMS.setAttribute("class","contact-msg");
-
-    let image = document.createElement("img");
-    image.setAttribute("src","img/palpatine.jpg");
-
-    let username = document.createElement("h5");
-    username.textContent = "Emperador Palpatine";
-
-    let time = document.createElement("span");
-    time.textContent = fct_formatDate(); */
-
-/*     let message = document.createElement("p");
-    message.textContent = "Bienvenido Geeks a GeeksHub Academy!!! Espero que disfrutes.";
- */
     chat.channels[0].messages.forEach(element => {
         let contact = document.createElement("div");
         contact.setAttribute("class","contact");
@@ -175,7 +146,7 @@ function fct_openChannel(channel) {
 
     document.getElementById("chat").innerHTML = "";
 
-    let tmpchat = document.getElementById("chat");
+    let chat_content = document.getElementById("chat");
 
 
     chat.channels.forEach(element => {
@@ -188,21 +159,29 @@ function fct_openChannel(channel) {
             title.appendChild(titleNode);
             titleNode.textContent = channel;
 
-            fct_createMessages_Contact(tmpchat);
+            /* if(channel == "#General") {
+                fct_fill_general(channel);
+            } */
 
+            fct_createMessages_Contact(chat_content, channel);
         }
     });
+
+    
 }
 
 //Muestra el listado de canales
 function fct_displayChannelList (chat) {
 
     let listado = document.getElementById("list");
+    listado.value = "";
 
     if(chat.channels.length == 0) {
         chat.addChannel("#General");
     }
-    fct_fill_general();
+
+    listado.innerHTML = "";
+
     chat.channels.forEach(element => {
         let name = element.name;
 
@@ -228,9 +207,6 @@ function fct_displayChannelList (chat) {
 function fct_addNewChannel() {
     chat.addChannel(document.getElementById("createChannel").value);
 
-    console.log("3. ");
-    console.log(chat.channels);
-
     fct_displayChannelList(chat);
 
     //Cierra el popup
@@ -242,11 +218,5 @@ function fct_addNewChannel() {
 }
 
 let chat = new Chat();
-console.log("1. ");
-console.log(chat.channels);
-let smsContact = new Message();
-let smsSender = new Message();
 fct_displayChannelList(chat);
 
-console.log("2. ");
-console.log(chat.channels);
