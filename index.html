@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <title>Chat</title>
 </head>
+
 <body>
     <div id="container">
         <div id="sidebar">
@@ -45,7 +47,7 @@
             <div id="footer">
                 <div id="new-message">
                     <input type="text" name="" id="messagebox" placeholder="Type here...">
-                    <button type="submit" id="btn-send">Send</button>
+                    <button type="submit" id="btn-send" onclick="fct_addNewMessage()">Send</button>
                 </div>
             </div>
         </div>
@@ -56,7 +58,7 @@
                 <p>Name</p>
                 <input type="text" name="" id="createChannel">
                 <!-- <input type="submit" value="Create" id="create" onclick="fct_addNewChannel()"> -->
-                <input type="submit" value="Create" id="create" onclick="fct_paintChannels()">
+                <input type="submit" value="Create" id="create" onclick="fct_newChannel()">
             </div>
         </div>
     </div>
@@ -64,4 +66,5 @@
     <!-- <script src="js/javascript.js"></script> -->
     <script src="js/tmp-javascript.js"></script>
 </body>
+
 </html>

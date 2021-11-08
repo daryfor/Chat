@@ -93,10 +93,10 @@
     display: block;
     scroll-snap-align: start; */
     width: 100%;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
     margin-top: 61px;
     display: block;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 
 .contact {
@@ -117,7 +117,7 @@
 }
 
 .contact-messagebox {
-    display: inline-block;  
+    display: inline-block;
     border-radius: 10px;
     background: rgb(245, 235, 235);
     padding: 10px 20px 10px 10px;
@@ -140,7 +140,7 @@
 }
 
 .contact-time {
-    width: 25%;
+    width: 40%;
     text-align: right;
 }
 
@@ -152,6 +152,65 @@
 
 .contact-msg {
     padding: 10px 20px 0px 10px;
+    border-top: 1px solid rgb(197, 194, 194);
+}
+
+.sender {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    margin: 20px 0px 20px 5px;
+}
+
+.sender-messagebox {
+    display: inline-block;
+    border-radius: 10px;
+    background: rgb(225, 220, 255);
+    padding: 10px 10px 10px 20px;
+    min-width: 15%;
+}
+
+.sender-info {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+}
+
+.sender-time {
+    width: 50%;
+}
+
+.sender-time span {
+    font-size: 10px;
+    color: rgb(114, 114, 114);
+}
+
+.sender-username {
+    width: 50%;
+}
+
+.sender-username h5 {
+    font-size: 14px;
+    text-align: right;
+    color: rgb(73, 73, 73);
+}
+
+.sender-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.sender-img img {
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.sender-msg {
+    padding: 10px 10px 0px 0px;
+    text-align: right;
     border-top: 1px solid rgb(197, 194, 194);
 }
 

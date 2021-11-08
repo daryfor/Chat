@@ -1,9 +1,9 @@
 class Message {
-    constructor(user, avatar, dateInfo, textSMS) {
+    constructor(user, avatar, sDate, sms) {
         this.user = user;
         this.avatar = avatar;
-        this.dateInfo = dateInfo;
-        this.textSMS = textSMS;
+        this.sDate = sDate;
+        this.sms = sms;
     }
 }
 
@@ -18,6 +18,63 @@ class Channel {
     }
 }
 
+class Chat {
+    constructor() {
+        this.channels = [];
+    }
+
+    addChannel(name) {
+        let channel = new Channel(name);
+        this.channels.push(channel);
+    }
+
+    getChannels() {
+        return this.channels;
+    }
+
+    getChannel(channelID) {
+        if (channelID < this.channels.length) {
+            return this.channels[channelID];
+        } else {
+            return null;
+        }
+    }
+}
+
+// Muestra el listado de canales
+function fct_showChannels() {
+    let listado = document.getElementById("list");
+    listado.value = "";
+    listado.innerHTML = "";
+
+    if (chat.channels.length == 0) {
+        chat.addChannel("#General");
+    }
+
+    // Recorriendo el array de canales para mostrarlos como un listado
+    chat.channels.forEach(canal => {
+        let name = canal.name;
+
+        //Elimina los posibles espacios en blanco para agregar el nombre sin ellos al atributo id
+        if (name.indexOf(' ') > 0) {
+            name = name.replace(/\s+/g, '');
+        }
+
+        let liNode = document.createElement("li");
+        let aNode = document.createElement("a");
+        let txtNode = document.createTextNode(canal.name);
+
+        aNode.setAttribute("href", "#");
+        aNode.setAttribute("id", name);
+        aNode.setAttribute("onclick", "fct_accessChannel(\"" + name + "\")");
+
+        aNode.appendChild(txtNode);
+        liNode.appendChild(aNode);
+        listado.appendChild(liNode);
+    });
+}
+
+// Formatear la fecha para mostrarla en formato dd/MM HH:MM
 function fct_formatDate() {
     let date = new Date();
 
@@ -29,98 +86,126 @@ function fct_formatDate() {
     return (day + "/" + month + " " + hour + ":" + min);
 }
 
-function fct_addChannel() {
-    //let channel;
+// Agrega nuevo Canal al listado de canales
+function fct_newChannel() {
+    let newChannel = document.getElementById("createChannel").value;
+    let checkName = false;
 
-    if (channels.length == 0) {
-        channel = new Channel("#General");
+    // Controlar que el nombre del canal no existe en el listado
+    chat.channels.forEach(canal => {
+        if (canal.name == newChannel) {
+            checkName = true;
+        }
+    });
+
+    if (checkName == true) {
+        alert("Ya existe un canal con ese nombre");
     } else {
-        channel = new Channel(document.getElementById('createChannel').value);
+        chat.addChannel(newChannel);
+        fct_showChannels();
+        fct_closeWindow();
     }
 
-    channels.push(channel);
-
-    //Cierra el popup
-    fct_closeWindow();
-
-    //Limpia el valor del textbox dentro del popup
+    // Limpiar el valor en el textbox del popup
     document.getElementById("createChannel").value = "";
 }
 
-//Genera un popup para agregar un nuevo canal
+// Genera un popup para agregar un nuevo canal
 function fct_callpopup() {
     document.querySelector("#popup").style.display = "flex";
 }
 
-//Cierra el popup en caso de que no se quiera introducir nuevo canal
+// Cierra el popup en caso de que no se quiera introducir nuevo canal
 function fct_closeWindow() {
     document.querySelector("#popup").style.display = "none";
 }
 
-function fct_paintChannels() {
+// Muestra nombre y mensajes del canal seleccionado
+function fct_accessChannel(name) {
+    let chat_content = document.getElementById("chat");
+    chat_content.innerHTML = "";
 
-    fct_addChannel();
-    let listado = document.getElementById("list");
-    listado.value = "";
+    // Agregar nombre del canal al titulo
+    let titleNode = document.getElementById("channel-name");
+    titleNode.innerHTML = "";
 
-    listado.innerHTML = "";
+    let title = document.createElement("h2");
+    title.setAttribute("id", "title");
+    title.textContent = name;
 
-    channels.forEach(element => {
-        let name = element.name;
+    titleNode.appendChild(title);
 
-        //Elimina los posibles espacios en blanco para agregar el nombre sin ellos al atributo id
-        if (name.indexOf(' ') > 0) {
-            name = name.replace(/\s+/g, '');
+    // Recorrer el listado de canales para acceder al canal correspondiente
+    chat.channels.forEach(canal => {
+        if (canal.name == name) {
+            // Agregar mensajes predeterminados en el canal #General
+            if (name == "#General") {
+                let username = "Palpatine";
+                let avatar = "img/palpatine.jpg";
+                let fecha = fct_formatDate();
+                let text1 = "Bienvenido a GeekHubs Academy";
+                let text2 = "Este es un curso para principiantes";
+                let text3 = "Vampos a aprender a desarrollar con HTML, CSS y Javascript";
+                let text4 = "Espero que disfruteis";
+                let text5 = "A continuacion, dejad los mensajes pertinentes";
+                let text6 = "Lo primero, por favor, presentaros";
+
+                if (canal.messages.length == 0) {
+                    let sms1 = new Message(username, avatar, fecha, text1);
+                    let sms2 = new Message(username, avatar, fecha, text2);
+                    let sms3 = new Message(username, avatar, fecha, text3);
+                    let sms4 = new Message(username, avatar, fecha, text4);
+                    let sms5 = new Message(username, avatar, fecha, text5);
+                    let sms6 = new Message(username, avatar, fecha, text6);
+
+                    canal.addMessage(sms1);
+                    canal.addMessage(sms2);
+                    canal.addMessage(sms3);
+                    canal.addMessage(sms4);
+                    canal.addMessage(sms5);
+                    canal.addMessage(sms6);
+
+                    fct_paintMessages(chat_content, canal.messages);
+
+                } else {
+                    fct_paintMessages(chat_content, canal.messages);
+                }
+            } else {
+
+            }
+
+
         }
-
-        let liNode = document.createElement("li");
-        let aNode = document.createElement("a");
-        let txtNode = document.createTextNode(element.name);
-
-        aNode.setAttribute("href", "#");
-        aNode.setAttribute("id", name);
-        aNode.setAttribute("onclick", "fct_showMessages(\"" + name + "\")");
-
-        aNode.appendChild(txtNode);
-        liNode.appendChild(aNode);
-        listado.appendChild(liNode);
     });
 }
 
-function fct_paintMessages(padre, Channel) {
-    Channel.messages.forEach(element => {
-        if (element.user == "Emperador Palpatine") {
+// Agrega el código HTML necesario para mostrar los mensajes del canal
+function fct_paintMessages(parentDiv, mensajes) {
+    for (let i = 0; i < mensajes.length; i++) {
+        if (mensajes[i].user == "Palpatine") {
             let contact = document.createElement("div");
-            contact.setAttribute("class", "contact");
-
             let contactImg = document.createElement("div");
-            contactImg.setAttribute("class", "contact-img");
-
             let contactMessage = document.createElement("div");
-            contactMessage.setAttribute("class", "contact-messagebox");
-
             let contactInfo = document.createElement("div");
-            contactInfo.setAttribute("class", "contact-info");
-
             let userNode = document.createElement("div");
-            userNode.setAttribute("class", "contact-username");
-
             let contactTime = document.createElement("div");
-            contactTime.setAttribute("class", "contact-time");
-
             let contactSMS = document.createElement("div");
-            contactSMS.setAttribute("class", "contact-msg");
-
             let image = document.createElement("img");
-            image.setAttribute("src", element.avatar);
-
             let username = document.createElement("h5");
-            username.textContent = element.user;
-
             let time = document.createElement("span");
-            time.textContent = element.dateInfo;
             let message = document.createElement("p");
-            message.textContent = element.textSMS;
+
+            contact.setAttribute("class", "contact");
+            contactImg.setAttribute("class", "contact-img");
+            contactMessage.setAttribute("class", "contact-messagebox");
+            contactInfo.setAttribute("class", "contact-info");
+            userNode.setAttribute("class", "contact-username");
+            contactTime.setAttribute("class", "contact-time");
+            contactSMS.setAttribute("class", "contact-msg");
+            image.setAttribute("src", mensajes[i].avatar);
+            username.textContent = mensajes[i].user;
+            time.textContent = mensajes[i].sDate;
+            message.textContent = mensajes[i].sms;
 
             contactSMS.appendChild(message);
             contactTime.appendChild(time);
@@ -133,113 +218,80 @@ function fct_paintMessages(padre, Channel) {
             contact.appendChild(contactImg);
             contact.appendChild(contactMessage);
 
-            padre.appendChild(contact);
+            parentDiv.appendChild(contact);
         } else {
             let sender = document.createElement("div");
-            sender.setAttribute("class", "sender");
-
             let senderMessage = document.createElement("div");
-            senderMessage.setAttribute("class", "sender-messagebox");
-
             let senderInfo = document.createElement("div");
-            senderInfo.setAttribute("class", "sender-info");
-
             let senderTime = document.createElement("div");
-            senderTime.setAttribute("class", "sender-time");
-
             let userNode = document.createElement("div");
-            userNode.setAttribute("class", "sender-username");
-
             let senderSMS = document.createElement("div");
-            senderSMS.setAttribute("class", "sender-msg");
-
             let senderImg = document.createElement("div");
-            senderImg.setAttribute("class", "sender-img");
-
             let image = document.createElement("img");
-            image.setAttribute("src", element.avatar);
-
             let username = document.createElement("h5");
-            username.textContent = element.user;
-
             let time = document.createElement("span");
-            time.textContent = element.dateInfo;
             let message = document.createElement("p");
-            message.textContent = element.textSMS;
+
+            sender.setAttribute("class", "sender");
+            senderMessage.setAttribute("class", "sender-messagebox");
+            senderInfo.setAttribute("class", "sender-info");
+            senderTime.setAttribute("class", "sender-time");
+            userNode.setAttribute("class", "sender-username");
+            senderSMS.setAttribute("class", "sender-msg");
+            senderImg.setAttribute("class", "sender-img");
+            image.setAttribute("src", mensajes[i].avatar);
+            username.textContent = mensajes[i].user;
+            time.textContent = mensajes[i].sDate;
+            message.textContent = mensajes[i].sms;
 
             senderSMS.appendChild(message);
-            senderTime.appendChild(time);
             userNode.appendChild(username);
-            senderInfo.appendChild(userNode);
+            senderTime.appendChild(time);
             senderInfo.appendChild(senderTime);
+            senderInfo.appendChild(userNode);
             senderMessage.appendChild(senderInfo);
             senderMessage.appendChild(senderSMS);
+            sender.appendChild(senderMessage);
             senderImg.appendChild(image);
             sender.appendChild(senderImg);
-            sender.appendChild(senderMessage);
 
-            padre.appendChild(sender);
-        }
-    });
-}
-
-function fct_showMessages(channelname) {
-
-    chat_content.innerHTML = "";
-
-    //Poner el nombre del canal como título
-    let titleNode = document.getElementById("channel-name");
-    let title = document.createElement("h2");
-
-    titleNode.innerHTML = "";
-
-    title.setAttribute("id", "title");
-    title.textContent = channelname;
-    titleNode.appendChild(title);
-
-    if (channelname == "#General") {
-        let username = "Emperador Palpatine";
-        let imgAvatar = "img/palpatine.jpg";
-        let dateTime = fct_formatDate();
-        let text1 = "Bienvenido a GeekHubs Academy";
-        let text2 = "Este curso será lo más";
-        let text3 = "Vamos a aprender muchas cosas del desarollo Web"
-        if (channel.messages.length == 0) {
-            let sms1 = new Message(username, imgAvatar, dateTime, text1);
-            /*sms1.user = username;
-            sms1.avatar = imgAvatar;
-            sms1.dateInfo = dateTime;
-            sms1.textSMS = text1;*/
-            let sms2 = new Message(username, imgAvatar, dateTime, text2);
-            /*sms2.user = username;
-            sms2.avatar = imgAvatar;
-            sms2.dateInfo = dateTime;
-            sms2.textSMS = text2;*/
-            let sms3 = new Message(username, imgAvatar, dateTime, text3);
-            /*sms3.user = username;
-            sms3.avatar = imgAvatar;
-            sms3.dateInfo = dateTime;
-            sms3.textSMS = text3;*/
-            channel.addMessage(sms1);
-            channel.addMessage(sms2);
-            channel.addMessage(sms3);
+            parentDiv.appendChild(sender);
         }
     }
-
-    fct_paintMessages(chat_content, channel);
 }
 
+function fct_addNewMessage() {
+    let chat_content = document.getElementById("chat");
+    let chat_scroll = document.getElementById("chat");
+    let number = chat_scroll.scrollHeight;
+    chat_content.innerHTML = "";
 
+    let titulo = document.getElementById("title").textContent;
 
+    chat.channels.forEach(canal => {
+        if (canal.name == titulo) {
+            let username = "Yoda";
+            let avatar = "img/avatar.jpg";
+            let fecha = fct_formatDate();
+            let mensaje = document.getElementById("messagebox").value;
 
+            let sms = new Message(username, avatar, fecha, mensaje);
 
+            canal.addMessage(sms);
 
+            fct_paintMessages(chat_content, canal.messages);
+        }
+    });
 
+    document.getElementById("messagebox").value = "";
 
+    // Hacer que el scroll se posicione al final del todo, así muestra el último mensaje
+    chat_scroll.scrollIntoView({
+        block: "end"
+    });
 
+}
 
-/* COMIENZA EL JAVASCRIPT */
-let channel;
-let channels = [];
-let chat_content = document.getElementById("chat");
-fct_paintChannels();
+/* COMIENZO DEL JAVASCRIPT */
+let chat = new Chat();
+fct_showChannels();
