@@ -261,34 +261,32 @@ function fct_paintMessages(parentDiv, mensajes) {
 }
 
 function fct_addNewMessage() {
-    let chat_content = document.getElementById("chat");
-    let chat_scroll = document.getElementById("chat");
-    let number = chat_scroll.scrollHeight;
-    chat_content.innerHTML = "";
+    let mensaje = document.getElementById("messagebox").value;
 
-    let titulo = document.getElementById("title").textContent;
+    if (mensaje.length > 0) {
+        let chat_content = document.getElementById("chat");
+        chat_content.innerHTML = "";
+        let titulo = document.getElementById("title").textContent;
 
-    chat.channels.forEach(canal => {
-        if (canal.name == titulo) {
-            let username = "Yoda";
-            let avatar = "img/avatar.jpg";
-            let fecha = fct_formatDate();
-            let mensaje = document.getElementById("messagebox").value;
+        chat.channels.forEach(canal => {
+            if (canal.name == titulo) {
+                let username = "Yoda";
+                let avatar = "img/avatar.jpg";
+                let fecha = fct_formatDate();
+                let sms = new Message(username, avatar, fecha, mensaje);
 
-            let sms = new Message(username, avatar, fecha, mensaje);
+                canal.addMessage(sms);
 
-            canal.addMessage(sms);
+                fct_paintMessages(chat_content, canal.messages);
+            }
+        });
 
-            fct_paintMessages(chat_content, canal.messages);
-        }
-    });
+        document.getElementById("messagebox").value = "";
 
-    document.getElementById("messagebox").value = "";
+        // Hacer que el scroll se posicione al final del todo, así muestra el último mensaje
+        chat_content.scrollIntoView(false);
+    }
 
-    // Hacer que el scroll se posicione al final del todo, así muestra el último mensaje
-    chat_scroll.scrollIntoView({
-        block: "end"
-    });
 
 }
 

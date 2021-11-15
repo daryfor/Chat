@@ -87,16 +87,13 @@
 
 /* CHAT */
 #chat {
-    /* width: 100%;
-    height: 80vh;
-    margin-top: 80px;
-    display: block;
-    scroll-snap-align: start; */
     width: 100%;
-    margin-bottom: 100px;
     margin-top: 61px;
     display: block;
     overflow-y: scroll;
+    scroll-margin-inline-end: 2rem;
+    margin-bottom: 70px;
+    overflow: hidden;
 }
 
 .contact {
